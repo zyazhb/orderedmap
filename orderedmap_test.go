@@ -3,7 +3,7 @@ package orderedmap
 import "testing"
 
 func TestOrderedMap(t *testing.T) {
-	om1 := NewOrderdMap([]OrderdMapElement[int, string]{{1, "a"}, {2, "b"}, {3, "c"}})
+	om1 := NewOrderdMap([]OrderdMapElement[int, string]{{1, "a"}, {2, "b"}, {3, "c"}}, false)
 	if om1.Get(1) != "a" {
 		t.Error("Get(1) should return 'a'")
 	}
@@ -14,18 +14,18 @@ func TestOrderedMap(t *testing.T) {
 		t.Error("Len() should return 3")
 	}
 
-	om2 := NewOrderdMap([]OrderdMapElement[string, string]{{"1", "a"}, {"2", "b"}, {"3", "c"}})
+	om2 := NewOrderdMap([]OrderdMapElement[string, string]{{"1", "a"}, {"2", "b"}, {"3", "c"}}, false)
 	if om2.Get("1") != "a" {
-		t.Error("Get(1) should return 'a'")
+		t.Error("Get('1') should return 'a'")
 	}
 	om2.Set("2", "bb")
 	if om2.Get("2") != "bb" {
-		t.Error("Get(2) should return 'b'")
+		t.Error("Get('2') should return 'bb'")
 	}
 
-	om3 := NewOrderdMap([]OrderdMapElement[float32, []string]{{1.1, []string{"a"}}, {2.2, []string{"b"}}, {3.3, []string{"c"}}})
+	om3 := NewOrderdMap([]OrderdMapElement[float32, []string]{{1.1, []string{"a"}}, {2.2, []string{"b"}}, {3.3, []string{"c"}}}, false)
 	if om3.Get(1.1)[0] != "a" {
-		t.Error("Get(1) should return 'a'")
+		t.Error("Get(1.1) should return 'a'")
 	}
 	count := 0
 	for k, v := range om3.Range() {
@@ -35,6 +35,6 @@ func TestOrderedMap(t *testing.T) {
 		count++
 	}
 	if om3.Get(2.2)[0] != "b" {
-		t.Error("Get(2) should return 'b'")
+		t.Error("Get(2.2) should return 'b'")
 	}
 }
